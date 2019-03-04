@@ -1,0 +1,76 @@
+2
+I = imread('lena.bmp');
+figure;clims = [0 255];imagesc(I,clims);colormap(gray(2));title('图像灰度级为8');
+figure;clims = [0 255];imagesc(I,clims);colormap(gray(128));title('图像灰度级为7');
+figure;clims = [0 255];imagesc(I,clims);colormap(gray(64));title('图像灰度级为6')
+figure;clims = [0 255];imagesc(I,clims);colormap(gray(32));title('图像灰度级为5')
+figure;clims = [0 255];imagesc(I,clims);colormap(gray(16));title('图像灰度级为4')
+figure;clims = [0 255];imagesc(I,clims);colormap(gray(8));title('图像灰度级为3')
+figure;clims = [0 255];imagesc(I,clims);colormap(gray(4));title('图像灰度级为2')
+figure;clims = [0 255];imagesc(I,clims);colormap(gray(2));title('图像灰度级为1')
+
+3
+I = imread('lena.bmp');
+junzhi = mean2(I)
+fangcha = std2(I)
+
+4
+I = imread('lena.bmp');
+I1 = imresize(I,[2048,2048],'nearest');
+I2 = imresize(I,[2048,2048],'bilinear');
+I3 = imresize(I,[2048,2048],'bicubic');
+subplot(221),imshow(I),title('原始图像');
+subplot(222),imshow(I1),title('最邻近插值法');
+subplot(223),imshow(I2),title('双线性插值法');
+subplot(224),imshow(I3),title('双三次插值法');
+
+5-1
+I1 = imread('lena.bmp');
+I2 = imread('elain1.bmp');
+S = [1 1.5 0;0 1 0;0 0 1];
+tform = maketform('affine',S);
+% lena的水平插值
+I11 = imtransform(I1,tform);
+I12 = imresize(I11,[2048 2048],'nearest');
+I13 = imresize(I11,[2048 2048],'bilinear');
+I14 = imresize(I11,[2048 2048],'bicubic');
+figure,imshow(I1);title('原图像')
+figure,imshow(I12);title('最近邻插值')
+figure,imshow(I13);title('双线性插值')
+figure,imshow(I14);title('双三次插值')
+
+% elain的水平插值
+I21 = imtransform(I2,tform);
+I22 = imresize(I21,[2048 2048],'nearest');
+I23 = imresize(I21,[2048 2048],'bilinear');
+I24 = imresize(I21,[2048 2048],'bicubic');
+figure,imshow(I2);title('原图像')
+figure,imshow(I22);title('最近邻插值')
+figure,imshow(I23);title('双线性插值')
+figure,imshow(I24);title('双三次插值')
+
+
+5-2
+
+%lena的旋转插值
+J1=imread('lena.bmp');                         %读入图像
+J11=imrotate(J1, 30);                            %设置旋转角度，实现旋转并显示
+J12=imrotate(J1,30, 'nearest','loose');
+J13=imrotate(J1,30, 'bilinear','loose');
+J14=imrotate(J1,30, 'bicubic','loose');    %设置输出图像大小，实现旋转图像并显示                            
+figure,imshow(J11);title('旋转后图像')    %显示旋转处理结果
+figure,imshow(J12);title('最近邻插值')
+figure,imshow(J13);title('双线性插值')
+figure,imshow(J14);title('双三次插值')
+
+% elain的旋转插值
+J2=imread('elain1.bmp');                      %读入图像
+J21=imrotate(J2, 30);                            %设置旋转角度，实现旋转并显示
+J22=imrotate(J2,30, 'nearest','loose');
+J23=imrotate(J2,30, 'bilinear','loose');
+J24=imrotate(J2,30, 'bicubic','loose');    %设置输出图像大小，实现旋转图像并显示                            
+ 
+figure,imshow(J21);title('旋转后图像')    %显示旋转处理结果
+figure,imshow(J22);title('最近邻插值')
+figure,imshow(J23);title('双线性插值')
+figure,imshow(J24);title('双三次插值')
